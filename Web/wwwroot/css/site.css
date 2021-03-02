@@ -1,0 +1,120 @@
+﻿@font-face {
+    font-family: 'opensans-regular';
+    src: url('../fonts/opensans-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'opensans-bold';
+    src: url('../fonts/opensans-bold.ttf') format('truetype');
+}
+
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+    border-radius: 30px;
+    background-color: #51b5b1;
+    padding: 10px 25px 10px 25px;
+    font-size: 0.9em;
+    font-family: opensans-bold;
+}
+
+.filterButton {
+    border-radius: 30px;
+    background-color: #edf7f7;
+    border: 2px solid #51b5b1;
+    width: 100px;
+    height: 40px;
+    color: #51b5b1;
+    font-size: 0,8em;
+}
+
+.big {
+    font-size: 1.5em;
+}
+
+a {
+    color: #51b5b1;
+}
+
+
+select {
+    height: 40px;
+    font-family: opensans-bold;
+    padding-left: 14px;
+    padding-right: 4px;
+    margin-right: 20px;
+}
+
+body {
+    font-family: opensans-regular, serif;
+}
+
+html {
+    font-size: 14px;
+}
+
+
+.ticketAmount {
+    font-size:2em;
+}
+
+.bold {
+    font-family: opensans-bold;
+}
+
+.columnHeader {
+    font-size: 0.9em;
+    color: grey;
+}
+
+.columnHeader th {
+    border-top: none;
+}
+
+.lineIcon {
+    height:15px;
+}
+
+header {
+    background-color: #000000;
+    color: #fff;
+}
+
+.table tr td {
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }

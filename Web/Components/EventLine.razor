@@ -1,0 +1,28 @@
+﻿@using Web.ViewModels
+<tr>
+    <td class="bold big">
+        @EventViewModel.Name
+    </td>
+    <td>
+        @EventViewModel.EventType
+    </td>
+    <td>
+        @EventViewModel.Date.ToLocalTime().Date.ToShortDateString()
+    </td>
+    <td>
+        @EventViewModel.Venue
+    </td>
+    <td class="bold big">
+        @EventViewModel.PercentageSold
+    </td>
+    <td class="bold big">
+        @EventViewModel.TicketPrice
+    </td>
+</tr>
+
+@code {
+
+    [Parameter]
+    public EventPriceViewModel EventViewModel { get; set; }
+
+}

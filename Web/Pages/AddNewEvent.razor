@@ -1,0 +1,190 @@
+﻿@page "/addnew"
+@using Web.Mappers
+@using Web.ViewModels
+@using global::Shared.Enums
+@using global::Shared.Dtos
+@inject EventMapper EventMapper
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+
+<EditForm class="container mt-5" Model="@_eventViewModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group row">
+        <label for="eventtype" class="col-sm-3">Event type: </label>
+        <InputSelect ValueExpression="() => _eventViewModel.EventType" id="eventtype" class="form-control col-sm-8" Value="@_eventViewModel.EventType" ValueChanged="(EventType eventType) => EventTypeChanged(eventType)">
+            @foreach (var eventType in Enum.GetValues(typeof(EventType)))
+            {
+                <option value="@eventType">@eventType</option>
+            }
+        </InputSelect>
+    </div>
+
+    @if (_eventViewModel.EventType != EventType.Unknown)
+    {
+        <div class="form-group row">
+            <label for="name" class="col-sm-3">Name: </label>
+            <InputText id="name" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Name" placeholder="Enter name"></InputText>
+        </div>
+        <div class="form-group row">
+            <label for="date" class="col-sm-3">Date: </label>
+            <InputDate id="date" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Date" placeholder="Enter date"></InputDate>
+        </div>
+
+        <div class="form-group row">
+            <label for="venue" class="col-sm-3">Venue: </label>
+            <InputText id="venue" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Venue" placeholder="Enter venue"></InputText>
+        </div>
+
+        <div class="form-group row">
+            <label for="capacity" class="col-sm-3">Capacity: </label>
+            <InputNumber id="capacity" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Capacity" placeholder="Enter capacity"></InputNumber>
+        </div>
+
+        <div class="form-group row">
+            <label for="sold" class="col-sm-3">Sold: </label>
+            <InputNumber id="sold" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Sold" placeholder="Enter sold"></InputNumber>
+        </div>
+
+        <div class="form-group row">
+            <label for="venueCostType" class="col-sm-3">Venue cost type: </label>
+            <InputSelect id="venueCostType" class="form-control col-sm-8" @bind-Value="@_eventViewModel.VenueCostType">
+                @foreach (var costType in Enum.GetValues(typeof(CostType)))
+                {
+                    <option value="@costType">@costType</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group row">
+            <label for="marketingCostType" class="col-sm-3">Marketing cost type: </label>
+            <InputSelect id="marketingCostType" class="form-control col-sm-8" @bind-Value="@_eventViewModel.MarketingCostType">
+                @foreach (var costType in Enum.GetValues(typeof(CostType)))
+                {
+                    <option value="@costType">@costType</option>
+                }
+            </InputSelect>
+        </div>
+
+        @if (_eventViewModel is ConferenceViewModel conf)
+        {
+            <div class="form-group row">
+                <label for="badgecosts" class="col-sm-3">Badge costs: </label>
+                <InputNumber id="badgecosts" class="form-control col-sm-8" @bind-Value="@conf.BadgeCosts"></InputNumber>
+            </div>
+
+            <div class="form-group row">
+                <label for="cateringCosts" class="col-sm-3">Catering costs: </label>
+                <InputNumber id="cateringCosts" class="form-control col-sm-8" @bind-Value="@conf.CateringCosts"></InputNumber>
+            </div>
+        }
+
+        @if (_eventViewModel is MultiDayConferenceViewModel multiDayConf)
+        {
+            <div class="form-group row">
+                <label for="numberofdays" class="col-sm-3">Number of days: </label>
+                <InputNumber id="numberofdays" class="form-control col-sm-8" @bind-Value="@multiDayConf.NumberOfDays"></InputNumber>
+            </div>
+
+            <div class="form-group row">
+                <label for="accocosttype" class="col-sm-3">Accomodation cost type: </label>
+                <InputSelect id="accocosttype" class="form-control col-sm-8" @bind-Value="@multiDayConf.AccomodationCostType">
+                    @foreach (var costType in Enum.GetValues(typeof(CostType)))
+                    {
+                        <option value="@costType">@costType</option>
+                    }
+                </InputSelect>
+            </div>
+        }
+
+        @if (_eventViewModel is ConcertViewModel concert)
+        {
+            <div class="form-group row">
+                <label for="artistCosts" class="col-sm-3">Artist costs: </label>
+                <InputNumber id="artistCosts" class="form-control col-sm-8" @bind-Value="@concert.ArtistCosts"></InputNumber>
+            </div>
+
+            <div class="form-group row">
+                <label for="artistcosttype" class="col-sm-3">Artist cost type: </label>
+                <InputSelect id="artistcosttype" class="form-control col-sm-8" @bind-Value="@concert.ArtistCostType">
+                    @foreach (var costType in Enum.GetValues(typeof(CostType)))
+                    {
+                        <option value="@costType">@costType</option>
+                    }
+                </InputSelect>
+            </div>
+        }
+
+        @if (_eventViewModel is SportsGameViewModel sportsGame)
+        {
+            <div class="form-group row">
+                <label for="noPlayers" class="col-sm-3">Number of players: </label>
+                <InputNumber id="noPlayers" class="form-control col-sm-8" @bind-Value="@sportsGame.NumberOfPlayers"></InputNumber>
+            </div>
+
+            <div class="form-group row">
+                <label for="costPlayer" class="col-sm-3">Costs per player: </label>
+                <InputNumber id="costPlayer" class="form-control col-sm-8" @bind-Value="@sportsGame.CostsPerPlayer"></InputNumber>
+            </div>
+        }
+        <button type="submit" class="btn btn-primary edit-btn">Add</button>
+    }
+</EditForm>
+
+
+@code
+{
+    private EventViewModel _eventViewModel = new();
+
+    private void EventTypeChanged(EventType eventType)
+    {
+        if (_eventViewModel.EventType == eventType)
+            return;
+
+        EventViewModel newViewModel;
+
+        switch (eventType)
+        {
+            case EventType.Unknown:
+                newViewModel = new EventViewModel();
+                break;
+            case EventType.Conference:
+                newViewModel = new ConferenceViewModel();
+                break;
+            case EventType.MultiDayConference:
+                newViewModel = new MultiDayConferenceViewModel();
+                break;
+            case EventType.Concert:
+                newViewModel = new ConcertViewModel();
+                break;
+            case EventType.SportsGame:
+                newViewModel = new SportsGameViewModel();
+                break;
+            default:
+                throw new ArgumentException($"Unknown event type {eventType}");
+        }
+
+        EventMapper.CopyBaseProperties(_eventViewModel, newViewModel);
+        newViewModel.EventType = eventType;
+        _eventViewModel = newViewModel;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        EventDto dto = null;
+        if (_eventViewModel is ConferenceViewModel conferenceViewModel)
+            dto = EventMapper.ConvertConferenceViewModelToDto(conferenceViewModel);
+        if (_eventViewModel is MultiDayConferenceViewModel multiDayConferenceViewModel)
+            dto = EventMapper.ConvertMultiDayConferenceViewModelToDto(multiDayConferenceViewModel);
+        if (_eventViewModel is ConcertViewModel concertViewModel)
+            dto = EventMapper.ConvertConcertViewModelToDto(concertViewModel);
+        if (_eventViewModel is SportsGameViewModel sportsGameViewModel)
+            dto = EventMapper.ConvertSportsGameViewModelToDto(sportsGameViewModel);
+        if (dto == null)
+            throw new ArgumentException("Unknown viewmodel type");
+
+        var result = await HttpClient.PostAsJsonAsync(_eventViewModel.ApiEndpoint, dto);
+        result.EnsureSuccessStatusCode();
+        NavigationManager.NavigateTo("/");
+    }
+}

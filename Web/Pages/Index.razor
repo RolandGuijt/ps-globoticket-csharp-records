@@ -1,0 +1,50 @@
+﻿@page "/"
+@using Web.Mappers
+@using Web.ViewModels
+@using global::Shared.Dtos
+@inject HttpClient HttpClient
+@inject EventMapper EventMapper
+
+<div class="container">
+    @if (_events == null)
+    {
+        <div>No events were found.</div>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+            <tr class="columnHeader">
+                <th>NAME</th>
+                <th>TYPE</th>
+                <th>DATE</th>
+                <th>VENUE</th>
+                <th>% SOLD</th>
+                <th>TICKETPRICE</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var eventObject in _events)
+            {
+                <EventLine EventViewModel="@eventObject"></EventLine>            }
+            <tr>
+                <td>
+                    <a class="btn-primary" type="button" href="/addnew">ADD</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@code
+{
+    IEnumerable<EventPriceViewModel> _events;
+
+    protected override async void OnInitialized()
+    {
+        var eventDtos = await HttpClient.GetFromJsonAsync<EventPriceDto[]>("/event");
+        _events = (eventDtos ?? Array.Empty<EventPriceDto>()).Select(d => EventMapper.ConvertPriceDtoToViewModel(d));
+        StateHasChanged();
+    }
+}
