@@ -19,8 +19,8 @@
                 <th>TYPE</th>
                 <th>DATE</th>
                 <th>VENUE</th>
-                <th>% SOLD</th>
-                <th>TICKETPRICE</th>
+                <th>CAPACITY</th>
+                <th>SOLD</th>
             </tr>
             </thead>
             <tbody>
@@ -39,12 +39,12 @@
 
 @code
 {
-    IEnumerable<EventPriceViewModel> _events;
+    IEnumerable<EventViewModel> _events;
 
     protected override async void OnInitialized()
     {
-        var eventDtos = await HttpClient.GetFromJsonAsync<EventPriceDto[]>("/event");
-        _events = (eventDtos ?? Array.Empty<EventPriceDto>()).Select(d => EventMapper.ConvertPriceDtoToViewModel(d));
+        var eventDtos = await HttpClient.GetFromJsonAsync<EventDto[]>("/event");
+        _events = (eventDtos ?? Array.Empty<EventDto>()).Select(d => EventMapper.ConvertPriceDtoToViewModel(d));
         StateHasChanged();
     }
 }

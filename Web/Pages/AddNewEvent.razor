@@ -46,26 +46,6 @@
             <InputNumber id="sold" class="form-control col-sm-8" @bind-Value="@_eventViewModel.Sold" placeholder="Enter sold"></InputNumber>
         </div>
 
-        <div class="form-group row">
-            <label for="venueCostType" class="col-sm-3">Venue cost type: </label>
-            <InputSelect id="venueCostType" class="form-control col-sm-8" @bind-Value="@_eventViewModel.VenueCostType">
-                @foreach (var costType in Enum.GetValues(typeof(CostType)))
-                {
-                    <option value="@costType">@costType</option>
-                }
-            </InputSelect>
-        </div>
-
-        <div class="form-group row">
-            <label for="marketingCostType" class="col-sm-3">Marketing cost type: </label>
-            <InputSelect id="marketingCostType" class="form-control col-sm-8" @bind-Value="@_eventViewModel.MarketingCostType">
-                @foreach (var costType in Enum.GetValues(typeof(CostType)))
-                {
-                    <option value="@costType">@costType</option>
-                }
-            </InputSelect>
-        </div>
-
         @if (_eventViewModel is ConferenceViewModel conf)
         {
             <div class="form-group row">
@@ -85,16 +65,6 @@
                 <label for="numberofdays" class="col-sm-3">Number of days: </label>
                 <InputNumber id="numberofdays" class="form-control col-sm-8" @bind-Value="@multiDayConf.NumberOfDays"></InputNumber>
             </div>
-
-            <div class="form-group row">
-                <label for="accocosttype" class="col-sm-3">Accomodation cost type: </label>
-                <InputSelect id="accocosttype" class="form-control col-sm-8" @bind-Value="@multiDayConf.AccomodationCostType">
-                    @foreach (var costType in Enum.GetValues(typeof(CostType)))
-                    {
-                        <option value="@costType">@costType</option>
-                    }
-                </InputSelect>
-            </div>
         }
 
         @if (_eventViewModel is ConcertViewModel concert)
@@ -103,16 +73,6 @@
                 <label for="artistCosts" class="col-sm-3">Artist costs: </label>
                 <InputNumber id="artistCosts" class="form-control col-sm-8" @bind-Value="@concert.ArtistCosts"></InputNumber>
             </div>
-
-            <div class="form-group row">
-                <label for="artistcosttype" class="col-sm-3">Artist cost type: </label>
-                <InputSelect id="artistcosttype" class="form-control col-sm-8" @bind-Value="@concert.ArtistCostType">
-                    @foreach (var costType in Enum.GetValues(typeof(CostType)))
-                    {
-                        <option value="@costType">@costType</option>
-                    }
-                </InputSelect>
-            </div>
         }
 
         @if (_eventViewModel is SportsGameViewModel sportsGame)
@@ -120,11 +80,6 @@
             <div class="form-group row">
                 <label for="noPlayers" class="col-sm-3">Number of players: </label>
                 <InputNumber id="noPlayers" class="form-control col-sm-8" @bind-Value="@sportsGame.NumberOfPlayers"></InputNumber>
-            </div>
-
-            <div class="form-group row">
-                <label for="costPlayer" class="col-sm-3">Costs per player: </label>
-                <InputNumber id="costPlayer" class="form-control col-sm-8" @bind-Value="@sportsGame.CostsPerPlayer"></InputNumber>
             </div>
         }
         <button type="submit" class="btn btn-primary edit-btn">Add</button>

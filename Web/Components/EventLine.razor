@@ -13,16 +13,14 @@
         @EventViewModel.Venue
     </td>
     <td class="bold big">
-        @EventViewModel.PercentageSold
+        @EventViewModel.Capacity
     </td>
     <td class="bold big">
-        @EventViewModel.TicketPrice
+        @EventViewModel.Sold
     </td>
 </tr>
 
 @code {
-
     [Parameter]
-    public EventPriceViewModel EventViewModel { get; set; }
-
+    public EventViewModel EventViewModel { get; set; }
 }

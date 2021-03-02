@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Api.Entities;
-using Shared.Enums;
 
 namespace Api.Repositories
 {
@@ -18,9 +17,7 @@ namespace Api.Repositories
                 BadgeCosts = 2,
                 Capacity = 95,
                 Sold = 10,
-                CateringCosts = 30,
-                MarketingCostType = CostType.Moderate,
-                VenueCostType = CostType.Expensive
+                CateringCosts = 30
             },
             new ConferenceEntity
             {
@@ -30,9 +27,7 @@ namespace Api.Repositories
                 BadgeCosts = 6,
                 Capacity = 543,
                 Sold = 112,
-                CateringCosts = 45,
-                MarketingCostType = CostType.Expensive,
-                VenueCostType = CostType.Cheap
+                CateringCosts = 45
             },
             new MultiDayConferenceEntity
             {
@@ -42,9 +37,7 @@ namespace Api.Repositories
                 BadgeCosts = 1,
                 Capacity = 2499,
                 Sold = 431,
-                CateringCosts = 89,
-                MarketingCostType = CostType.Expensive,
-                VenueCostType = CostType.Expensive
+                CateringCosts = 89
             },
             new ConcertEntity
             {
@@ -52,11 +45,8 @@ namespace Api.Repositories
                 Venue = "City Dome Paris",
                 Date = DateTimeOffset.Now.AddDays(120),
                 ArtistCosts = 5492,
-                ArtistCostType = CostType.Expensive,
                 Capacity = 5000,
-                Sold = 4932,
-                MarketingCostType = CostType.Cheap,
-                VenueCostType = CostType.Cheap
+                Sold = 4932
             },
             new SportsGameEntity
             {
@@ -65,10 +55,7 @@ namespace Api.Repositories
                 Date = DateTimeOffset.Now.AddDays(190),
                 Capacity = 7400,
                 Sold = 164,
-                CostsPerPlayer = 7300,
-                NumberOfPlayers = 25,
-                MarketingCostType = CostType.Expensive,
-                VenueCostType = CostType.Moderate
+                NumberOfPlayers = 25
             }
         };
 

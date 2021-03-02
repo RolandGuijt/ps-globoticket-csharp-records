@@ -28,7 +28,7 @@ namespace Api.Controllers
             if (!eventEntities.Any())
                 return NoContent();
 
-            var eventDtos = eventEntities.Select(e => _eventMapper.ConvertEntityToPriceDto(e));
+            var eventDtos = eventEntities.Select(e => _eventMapper.ConvertEntityToDto(e));
             return Ok(eventDtos);
         }
 
@@ -40,7 +40,7 @@ namespace Api.Controllers
             if (eventEntity == null)
                 return NotFound();
 
-            var eventDto = _eventMapper.ConvertEntityToPriceDto(eventEntity);
+            var eventDto = _eventMapper.ConvertEntityToDto(eventEntity);
             return Ok(eventDto);
         }
 
