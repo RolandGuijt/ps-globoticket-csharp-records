@@ -38,6 +38,12 @@ a {
     color: #51b5b1;
 }
 
+.soldInput {
+    margin-bottom: 4px;
+    margin-left: 3em;
+    width: 50px;
+}
+
 
 select {
     height: 40px;

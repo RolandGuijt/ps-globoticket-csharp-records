@@ -1,0 +1,35 @@
+﻿@using Web.ViewModels
+@if (Editing)
+{
+    <div>
+        <input id="sold" type="number" @bind="Event.Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
+        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @Event.Sold</a>
+    </div>
+}
+else
+{
+    <div style="width:10em">
+        <a class="btn-primary" type="button" @onclick="OnEditClick">EDIT SOLD</a>
+    </div>
+}
+
+@code {
+    bool Editing = false;
+
+    [Parameter]
+    public EventViewModel Event { get; set; }
+
+    [Parameter]
+    public EventCallback<EventViewModel> OnConfirmed { get; set; }
+
+    public void OnEditClick()
+    {
+        Editing = true;
+    }
+
+    public async void OnConfirmClick()
+    {
+        Editing = false;
+        await OnConfirmed.InvokeAsync(Event);
+    }
+}

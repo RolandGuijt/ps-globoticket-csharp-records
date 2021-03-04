@@ -18,9 +18,17 @@
     <td class="bold big">
         @EventViewModel.Sold
     </td>
+    <td>
+        <SoldEdit Event="EventViewModel" OnConfirmed="OnSoldEditConfirmed"/>
+    </td>
 </tr>
 
 @code {
     [Parameter]
     public EventViewModel EventViewModel { get; set; }
+
+    void OnSoldEditConfirmed(EventViewModel viewModel)
+    {
+        StateHasChanged();
+    }
 }
