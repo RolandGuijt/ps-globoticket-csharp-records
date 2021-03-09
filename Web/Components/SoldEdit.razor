@@ -22,17 +22,14 @@ else
     [Parameter]
     public EventCallback<EventViewModel> OnConfirmed { get; set; }
 
-    [Parameter]
-    public EventLine Parent { get; set; }
-
     public void OnEditClick()
     {
         Editing = true;
     }
 
-    public void OnConfirmClick()
+    public async void OnConfirmClick()
     {
+        await OnConfirmed.InvokeAsync(Event);
         Editing = false;
-        Parent.RefreshState();
     }
 }

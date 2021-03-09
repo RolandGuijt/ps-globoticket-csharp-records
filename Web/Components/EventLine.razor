@@ -19,7 +19,7 @@
         @EventViewModel.Sold
     </td>
     <td>
-        <SoldEdit Event="EventViewModel" Parent="@this"/>
+        <SoldEdit Event="EventViewModel" OnConfirmed="@OnConfirmed"/>
     </td>
 </tr>
 
@@ -31,6 +31,11 @@
     public Pages.Index Parent { get; set; }
 
     public void RefreshState()
+    {
+        StateHasChanged();
+    }
+
+    public void OnConfirmed(EventViewModel model)
     {
         StateHasChanged();
     }
