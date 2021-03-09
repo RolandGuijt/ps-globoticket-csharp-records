@@ -2,8 +2,8 @@
 @if (Editing)
 {
     <div>
-        <input id="sold" type="number" @bind="Event.Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
-        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @Event.Sold</a>
+        <input id="sold" type="number" @bind="sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
+        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @sold</a>
     </div>
 }
 else
@@ -16,11 +16,22 @@ else
 @code {
     bool Editing = false;
 
-    [Parameter]
-    public EventViewModel Event { get; set; }
+    private int sold;
+    private ListEventViewModel listEventViewModel;
 
     [Parameter]
-    public EventCallback<EventViewModel> OnConfirmed { get; set; }
+    public ListEventViewModel Event
+    {
+        get
+        {
+            return listEventViewModel;
+        }
+        set
+        {
+            sold = value.Sold;
+            listEventViewModel = value;
+        }
+    }
 
     [Parameter]
     public EventLine Parent { get; set; }
@@ -33,6 +44,7 @@ else
     public void OnConfirmClick()
     {
         Editing = false;
+        listEventViewModel = listEventViewModel with { Sold = sold };
         Parent.RefreshState();
     }
 }

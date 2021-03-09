@@ -4,6 +4,8 @@ using Shared.Enums;
 
 namespace Web.ViewModels
 {
+    public record ListEventViewModel(int Id, DateTimeOffset Date, EventType EventType, string Name, string Venue, int Capacity, int Sold);
+
     public class EventViewModel
     {
         public EventViewModel()

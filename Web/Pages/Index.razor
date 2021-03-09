@@ -40,12 +40,12 @@
 
 @code
 {
-    IEnumerable<EventViewModel> _events;
+    IEnumerable<ListEventViewModel> _events;
 
     protected override async void OnInitialized()
     {
         var eventDtos = await HttpClient.GetFromJsonAsync<EventDto[]>("/event");
-        _events = (eventDtos ?? Array.Empty<EventDto>()).Select(d => EventMapper.ConvertPriceDtoToViewModel(d));
+        _events = (eventDtos ?? Array.Empty<EventDto>()).Select(d => EventMapper.ConvertDtoToViewModel(d));
         StateHasChanged();
     }
 }
