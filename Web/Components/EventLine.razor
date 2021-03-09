@@ -19,19 +19,17 @@
         @EventViewModel.Sold
     </td>
     <td>
-        <SoldEdit Event="EventViewModel" Parent="@this"/>
+        <SoldEdit Sold="EventViewModel.Sold" OnConfirmed="@OnSoldConfirmed"/>
     </td>
 </tr>
 
 @code {
-    [Parameter]
-    public ListEventViewModel EventViewModel { get; set; }
-
-    [Parameter]
-    public Pages.Index Parent { get; set; }
-
-    public void RefreshState()
+    private void OnSoldConfirmed(int sold)
     {
+        EventViewModel = EventViewModel with { Sold = sold };
         StateHasChanged();
     }
+
+    [Parameter]
+    public ListEventViewModel EventViewModel { get; set; }
 }
