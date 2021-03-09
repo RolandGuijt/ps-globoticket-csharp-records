@@ -1,5 +1,4 @@
-﻿@using Web.ViewModels
-@if (Editing)
+﻿@if (Editing)
 {
     <div>
         <input id="sold" type="number" @bind="Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
@@ -15,8 +14,6 @@ else
 
 @code {
     bool Editing = false;
-
-    private ListEventViewModel listEventViewModel;
 
     [Parameter]
     public int Sold { get; set; }
