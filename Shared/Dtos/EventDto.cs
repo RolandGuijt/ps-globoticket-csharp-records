@@ -3,7 +3,8 @@ using Shared.Enums;
 
 namespace Shared.Dtos
 {
-    public record EventDto(int Id, DateTimeOffset Date, string Name, EventType EventType, string Venue, int Capacity, int Sold);
+    public record EventDto(int Id, DateTimeOffset Date, string Name, 
+        EventType EventType, string Venue, int Capacity, int Sold);
 
     public record ConferenceDto(int Id, DateTimeOffset Date, string Name, EventType EventType, string Venue, int Capacity,
         int Sold, int BadgeCosts, int CateringCosts) : EventDto(Id, Date, Name, EventType, Venue, Capacity, Sold);

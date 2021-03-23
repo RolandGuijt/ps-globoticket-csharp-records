@@ -1,10 +1,11 @@
 ﻿@using Web.ViewModels
 @if (Editing)
 {
-    <div>
-        <input id="sold" type="number" @bind="Event.Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
-        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @Event.Sold</a>
-    </div>
+<div>
+    <input id="sold" type="number" @bind="Event.Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
+    <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @Event.Sold</a>
+    <a class="btn-primary" type="button" @onclick="OnCancelClick">X</a>
+</div>
 }
 else
 {
@@ -25,6 +26,11 @@ else
     public void OnEditClick()
     {
         Editing = true;
+    }
+
+    public async void OnCancelClick()
+    {
+        Editing = false;
     }
 
     public async void OnConfirmClick()

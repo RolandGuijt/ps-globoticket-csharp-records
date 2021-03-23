@@ -5,19 +5,17 @@ namespace Web.Mappers
 {
     public class EventMapper
     {
-        public EventViewModel ConvertPriceDtoToViewModel(EventDto dto)
+        public EventViewModel ConvertDtoToViewModel(EventDto dto)
         {
-            var (id, date, name, eventType, venue, capacity, sold) = dto;
-
             return new EventViewModel
             {
-                Id = id,
-                Date = date,
-                Name = name,
-                EventType = eventType,
-                Venue = venue,
-                Capacity = capacity,
-                Sold = sold
+                Id = dto.Id,
+                Date = dto.Date,
+                Name = dto.Name,
+                EventType = dto.EventType,
+                Venue = dto.Venue,
+                Capacity = dto.Capacity,
+                Sold = dto.Sold
             };
         }
 

@@ -27,14 +27,6 @@
     [Parameter]
     public EventViewModel EventViewModel { get; set; }
 
-    [Parameter]
-    public Pages.Index Parent { get; set; }
-
-    public void RefreshState()
-    {
-        StateHasChanged();
-    }
-
     public void OnConfirmed(EventViewModel model)
     {
         StateHasChanged();
