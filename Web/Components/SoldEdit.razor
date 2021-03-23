@@ -1,8 +1,8 @@
 ﻿@if (Editing)
 {
     <div>
-        <input id="sold" type="number" @bind="Sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
-        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @Sold</a>
+        <input id="sold" type="number" @bind="sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
+        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @sold</a>
     </div>
 }
 else
@@ -14,12 +14,20 @@ else
 
 @code {
     bool Editing = false;
+    int sold = 0;
+    ListEventViewModel listEventViewModel;
 
     [Parameter]
-    public int Sold { get; set; }
+    public ListEventViewModel EventViewModel {
+        set
+        {
+            listEventViewModel = value;
+            sold = value.Sold;
+        }
+    }
 
     [Parameter]
-    public EventCallback<int> OnConfirmed { get; set; }
+    public EventCallback<ListEventViewModel> OnConfirmed { get; set; }
 
     public void OnEditClick()
     {
@@ -29,6 +37,7 @@ else
     public async void OnConfirmClick()
     {
         Editing = false;
-        await OnConfirmed.InvokeAsync(Sold);
+        var newViewModel = listEventViewModel with { Sold = sold };
+        await OnConfirmed.InvokeAsync(newViewModel);
     }
 }

@@ -1,5 +1,4 @@
-﻿@using Web.ViewModels
-<tr>
+﻿<tr>
     <td class="bold big">
         @EventViewModel.Name
     </td>
@@ -19,14 +18,14 @@
         @EventViewModel.Sold
     </td>
     <td>
-        <SoldEdit Sold="EventViewModel.Sold" OnConfirmed="@OnSoldConfirmed"/>
+        <SoldEdit EventViewModel="EventViewModel" OnConfirmed="@OnSoldConfirmed"/>
     </td>
 </tr>
 
 @code {
-    private void OnSoldConfirmed(int sold)
+    private void OnSoldConfirmed(ListEventViewModel newEventViewModel)
     {
-        EventViewModel = EventViewModel with { Sold = sold };
+        EventViewModel = newEventViewModel;
         StateHasChanged();
     }
 
