@@ -9,7 +9,7 @@ namespace Web.Mappers
         {
             var (id, date, name, eventType, venue, capacity, sold) = dto;
 
-            return new ListEventViewModel(id, date, eventType, name, venue, capacity, sold);
+            return new ListEventViewModel(id, date, name, eventType, venue, capacity, sold);
         }
 
         public void CopyBaseProperties(EventViewModel source, EventViewModel destination)
